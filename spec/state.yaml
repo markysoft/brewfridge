@@ -1,0 +1,9 @@
+--- !ruby/object:ThermState
+looped: false
+list_index: 0
+temp_data:
+  a:
+  - 15
+  b:
+  - 17
+list_max: 4

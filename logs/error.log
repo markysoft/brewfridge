@@ -1,0 +1,23 @@
+No sensors connected!
+C:/raspi/code/rt/lib/brewfridge/fridge_controller.rb:40:in `manage_fridge'
+C:/raspi/code/rt/lib/brewfridge/fridge_controller.rb:30:in `run'
+C:/raspi/code/rt/fridge_controller.rb:8:in `<top (required)>'
+-e:1:in `load'
+-e:1:in `<main>'
+No sensors connected!
+C:/raspi/code/rt/lib/brewfridge/fridge_controller.rb:40:in `manage_fridge'
+C:/raspi/code/rt/lib/brewfridge/fridge_controller.rb:30:in `run'
+C:/raspi/code/rt/fridge_controller.rb:8:in `<top (required)>'
+-e:1:in `load'
+-e:1:in `<main>'
+undefined local variable or method `heating' for #<HeatController:0x1fc32a8>
+C:/raspi/code/rt/lib/brewfridge/heat_controller.rb:24:in `toggle_heater'
+C:/raspi/code/rt/lib/brewfridge/heat_controller.rb:14:in `update'
+C:/raspi/code/rt/lib/brewfridge/fridge_controller.rb:32:in `manage_fridge'
+C:/raspi/code/rt/lib/brewfridge/fridge_controller.rb:19:in `run'
+C:/raspi/code/rt/fridge_controller.rb:8:in `<top (required)>'
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/ruby-debug-ide-0.4.17.beta16/lib/ruby-debug-ide.rb:86:in `debug_load'
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/ruby-debug-ide-0.4.17.beta16/lib/ruby-debug-ide.rb:86:in `debug_program'
+C:/Ruby193/lib/ruby/gems/1.9.1/gems/ruby-debug-ide-0.4.17.beta16/bin/rdebug-ide:109:in `<top (required)>'
+-e:1:in `load'
+-e:1:in `<main>'

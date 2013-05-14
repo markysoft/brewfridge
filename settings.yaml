@@ -1,0 +1,7 @@
+--- !ruby/object:Settings
+sleep_for: 30
+fridge_sensor: 28-000004955c1e
+max_readings: 2880 #2880 = one whole day (24 * 60 * 60) / sleep_for
+target_temp: 20
+tolerance: 0.1
+toggle_command: toggle 3 3
