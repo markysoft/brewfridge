@@ -1,5 +1,9 @@
 require "yaml"
 require "fileutils"
+require "sinatra"
+require 'sinatra/base'
+require 'json'
+require "rufus-scheduler"
 require_relative "brewfridge/settings"
 require_relative "brewfridge/extensions"
 require_relative "brewfridge/heat_controller"
@@ -8,3 +12,4 @@ require_relative "brewfridge/therm_state"
 require_relative "brewfridge/console_writer"
 require_relative "brewfridge/temp_summary"
 require_relative "brewfridge/fridge_controller"
+#require_relative "brewfridge/web_scheduler"

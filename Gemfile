@@ -1,2 +1,5 @@
 source 'https://rubygems.org'
 gem 'rspec', :require => 'spec'
+gem 'rufus-scheduler'
+gem 'sinatra'
+gem 'thin'

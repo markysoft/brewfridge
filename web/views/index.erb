@@ -1,0 +1,24 @@
+<h2>Status</h2>
+
+<table class='summary_table'>
+  <thead>
+  <tr>
+    <th>Sensor</th>
+    <th>Current</th>
+    <th>Max</th>
+    <th>Min</th>
+    <th>Average</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% for readings in FC.state.summary %>
+      <tr>
+        <td><%= readings.sensor %> </td>
+        <td><%= readings.current %> </td>
+        <td><%= readings.max %> </td>
+        <td><%= readings.min %> </td>
+        <td><%= readings.mean %> </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

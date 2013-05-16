@@ -1,1 +1,17 @@
 Simple BrewFridge controller for Rasperry Pi
+
+To install:
+
+sudo install ruby
+sudo gem install bundler
+sudo install git
+git clone https://github.com/markysoft/brewfridge.git
+cd to brewfridge
+bundle install
+
+to run tests:
+rspec -fd
+
+[to update]
+git pull origin master
+[end]

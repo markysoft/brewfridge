@@ -2,6 +2,8 @@ class FridgeController
 
   TOP_DIR = File.dirname(__FILE__) + '/../..'
 
+  attr_accessor :settings, :state
+
   def initialize
     @settings = load_settings()
     @heat_controller = HeatController.new(@settings, false)
@@ -25,15 +27,19 @@ class FridgeController
 
   def manage_fridge
     while true
-      if @sensor_manager.list_sensor_names.length == 0
-        raise "No sensors connected!"
-      end
-      @state.refresh_readings @sensor_manager
-      @heat_controller.update @state.current_temperature(@settings.fridge_sensor)
-      @console_writer.print_temps @state.summary
-      @state.save "snapshot.yaml"
+      refresh_state()
       sleep @settings.sleep_for
     end
+  end
+
+  def refresh_state
+    if @sensor_manager.list_sensor_names.length == 0
+      raise "No sensors connected!"
+    end
+    @state.refresh_readings @sensor_manager
+    @heat_controller.update @state.current_temperature(@settings.fridge_sensor)
+    @console_writer.print_temps @state.summary
+    @state.save "snapshot.yaml"
   end
 
   def log_exception(exception)

@@ -53,6 +53,7 @@ class ThermState
       ts.sensor = sensor
       ts.current = current_temperature(sensor)
       ts.min, ts.max = @temp_data[sensor].minmax
+      ts.mean = @temp_data[sensor].mean
       readings << ts
     end
     readings
