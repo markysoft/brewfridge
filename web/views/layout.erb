@@ -7,24 +7,23 @@
   <title>BrewFridge</title>
 
   <script language="javascript" type="text/javascript" src='http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js'></script>
-  <link rel="stylesheet" href="/css/blueprint/screen.css" type="text/css" media="screen, projection"/>
-  <link rel="stylesheet" href="/css/blueprint/print.css" type="text/css" media="print"/>
-  <link rel="stylesheet" href="/css/blueprint/plugins/fancy-type/screen.css" type="text/css" media="screen, projection"/>
+  <link rel="stylesheet" href="/sass/reset.css" type="text/css"/>
   <link rel="stylesheet" href="/css/brew.css" type="text/css"/>
+  <link rel="stylesheet" href="/sass/sass.css" type="text/css"/>
 </head>
 <body>
 
 <div class="container">
-  <div class="span-6 heading">
+  <div class="heading">
     <h1>BrewFridge</h1>
   </div>
-  <div class="span-18 menu last">
+  <div class="menu">
     <ul>
       <li><a href="/">Home</a></li>
       <li><a href="/manage">Manage</a></li>
     </ul>
   </div>
-  <div class="span-24 last">
+  <div class="content">
     <%= yield %>
   </div>
 </div>

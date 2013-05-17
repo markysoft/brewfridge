@@ -1,6 +1,16 @@
 require_relative "../lib/brewfridge"
 
+require 'sass'
+class SassHandler < Sinatra::Base
+  set :views, File.dirname(__FILE__) + '/views/stylesheets'
+  get '/sass/*.css' do
+    filename = params[:splat].first
+    scss filename.to_sym
+  end
+end
+
 class WebScheduler < Sinatra::Base
+  use SassHandler
 
   helpers do
     def snippet(template, options={}, locals={})
@@ -14,7 +24,6 @@ class WebScheduler < Sinatra::Base
   scheduler.every "#{FC.settings.sleep_for}s" do
     FC.refresh_state
   end
-
 
   get '/' do
     erb :index

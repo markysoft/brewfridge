@@ -1,0 +1,90 @@
+$primary_color: #C5D8D8;
+$tertiary_color:  darken($primary_color, 20%);
+
+@mixin borders {
+  border: 1px solid darken($primary_color, 20%);
+  padding: 0.2em;
+  text-align: center;
+  font: 1em consolas, Helvetica, sans-serif;
+}
+
+@mixin rounded_borders($color, $width: 5px, $rounding: 5px) {
+  -moz-border-radius: $rounding $rounding;
+  -webkit-border-radius: $rounding $rounding;
+  -khtml-border-radius: $rounding $rounding;
+  -o-border-radius: $rounding $rounding;
+  border-radius: $rounding $rounding;
+  border: $width $color solid;
+}
+
+ul {
+  @include rounded_borders($tertiary_color, 0.1em);
+  background: #fff;
+  //font-weight: bold;
+
+  border: 1px solid #ccc;
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  li {
+    display: inline;
+    line-height: 1.5em;
+    padding: 0 1em;
+  }
+  a {
+    color: #000;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.2em;
+}
+
+.container {
+  width: 25em;
+  margin: auto;
+
+  border: 1px solid #C5D8D8;
+}
+
+.heading {
+  float: left;
+  padding: 0.5em;
+  @include rounded_borders($tertiary_color, 0.1em);
+}
+.menu {
+  float: right;
+  clear: right;
+  padding: 0.5em;
+}
+
+.content {
+  clear: both;
+  padding: 0.5em;
+}
+
+table {
+  /*border: 1px solid;*/
+}
+
+
+th {
+  background: $primary_color;
+}
+
+tr {
+  @include borders;
+}
+
+td {
+  @include borders;
+}

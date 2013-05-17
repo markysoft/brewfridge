@@ -4,20 +4,20 @@
   <thead>
   <tr>
     <th>Sensor</th>
-    <th>Current</th>
+    <th>Now</th>
     <th>Max</th>
     <th>Min</th>
-    <th>Average</th>
+    <th>Avg</th>
   </tr>
   </thead>
   <tbody>
   <% for readings in FC.state.summary %>
       <tr>
-        <td><%= readings.sensor %> </td>
-        <td><%= readings.current %> </td>
-        <td><%= readings.max %> </td>
-        <td><%= readings.min %> </td>
-        <td><%= readings.mean %> </td>
+        <td><%= readings.sensor.sub "28-000004", "" %> </td>
+        <td><%= sprintf("%04.2f",readings.current) %> </td>
+        <td><%= sprintf("%04.2f",readings.max) %> </td>
+        <td><%= sprintf("%04.2f",readings.min) %> </td>
+        <td><%= sprintf("%04.2f",readings.mean) %> </td>
       </tr>
   <% end %>
   </tbody>
