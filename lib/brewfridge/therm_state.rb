@@ -22,6 +22,13 @@ class ThermState
     @heating = heating
   end
 
+  def last_reading_time
+    if @list_index >= 0
+      return @status_list[@list_index].time.strftime("%H:%M:%S")
+    end
+    "NA"
+  end
+
   def get_next_index
     next_index = @list_index + 1
     looped = @looped

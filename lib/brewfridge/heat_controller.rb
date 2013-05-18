@@ -24,6 +24,8 @@ class HeatController
     success = system(@toggle_exe)
     if success
       @heating = !@heating
+    else
+      puts "Error running #{@toggle_exe}"
     end
     open("#{TOP_DIR}/logs/heater.log", 'a') { |f|
       f.puts "Toggled to: #{@heating} at #{Time.now} success: #{success}"
