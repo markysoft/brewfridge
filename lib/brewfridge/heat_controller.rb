@@ -17,6 +17,7 @@ class HeatController
       puts "heat off"
       toggle_heater()
     end
+    @heating
   end
 
   def toggle_heater

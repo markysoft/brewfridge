@@ -6,9 +6,10 @@ class FridgeController
 
   def initialize
     @settings = load_settings()
-    @heat_controller = HeatController.new(@settings, false)
+    heating = false
+    @heat_controller = HeatController.new(@settings, heating)
     @sensor_manager = SensorManager.new()
-    @state = ThermState.new(@sensor_manager.list_sensor_names, @settings.max_readings)
+    @state = ThermState.new(@settings.max_readings)
     @console_writer = ConsoleWriter.new
   end
 
@@ -36,8 +37,10 @@ class FridgeController
     if @sensor_manager.list_sensor_names.length == 0
       raise "No sensors connected!"
     end
-    @state.refresh_readings @sensor_manager
-    @heat_controller.update @state.current_temperature(@settings.fridge_sensor)
+    @state.refresh_fridge_status @sensor_manager
+    fridge_temperature = @state.current_temperature(@settings.fridge_sensor)
+    @state.heating = @heat_controller.update(fridge_temperature)
+
     @console_writer.print_temps @state.summary
     @state.save "snapshot.yaml"
   end

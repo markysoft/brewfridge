@@ -22,7 +22,7 @@ ul {
   background: #fff;
   //font-weight: bold;
 
-  border: 1px solid #ccc;
+  border: 1px solid $tertiary_color;
   margin-top: 5px;
   margin-left: 5px;
   margin-right: 5px;
@@ -50,16 +50,16 @@ h2 {
 }
 
 .container {
-  width: 25em;
+  width: 24em;
   margin: auto;
 
-  border: 1px solid #C5D8D8;
+  //border: 1px solid #C5D8D8;
 }
 
 .heading {
   float: left;
   padding: 0.5em;
-  @include rounded_borders($tertiary_color, 0.1em);
+  //@include rounded_borders($tertiary_color, 0.1em);
 }
 .menu {
   float: right;

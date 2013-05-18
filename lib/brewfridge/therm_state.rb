@@ -1,37 +1,78 @@
 class ThermState
-  attr_accessor :list_index, :temp_data, :looped, :heating
+  attr_accessor :list_index, :looped, :status_list
 
   DATA_PATH = "/home/pi/brew/rt/data"
 
-  def initialize (sensors, max_readings)
+  def heating
+    @heating
+  end
+
+  def heating=(heating)
+    @heating = heating
+    if @list_index >= 0
+      @status_list[@list_index].heating = @heating
+    end
+  end
+
+  def initialize (max_readings, heating = false)
     @looped = false
     @list_index = -1
-    @temp_data = init_temp_data sensors
+    @status_list = []
     @list_max = max_readings
+    @heating = heating
   end
 
-  def init_temp_data(sensors)
-    temp_data = {}
-    sensors.each {|name| temp_data[name] = []}
-    temp_data
-  end
-
-  def increment_index
-    @list_index += 1
-    if @list_index >= @list_max
-      @list_index = 0
-      @looped = true
-      save "#{DATA_PATH}/#{Time.now.to_f}.yaml"
-      #puts "Has looped!"
+  def get_next_index
+    next_index = @list_index + 1
+    looped = @looped
+    if next_index >= @list_max
+      next_index = 0
+      looped = true
     end
+    [next_index, looped]
   end
 
-  def refresh_readings manager
-    increment_index
-    @temp_data.each_key do |sensor|
-      temp = manager.read_temp sensor
-      update_temp(sensor, temp)
+  def refresh_fridge_status manager
+    fridge_status = FridgeStatus.new(Time.now, @heating, manager.read_temperatures)
+    safe_list_update fridge_status
+  end
+
+  def safe_list_update(fridge_status)
+    #only update @next_index, @looped after the array is written to prevent
+    #threading issues where @next_index is nil or old data
+    next_index, looped = get_next_index
+    if looped
+      @status_list[next_index] = fridge_status
+    else
+      @status_list << fridge_status
     end
+
+    @looped = looped
+    @list_index = next_index
+  end
+
+  def summary()
+    readings = []
+    temperatures = {}
+
+    @status_list.each do |status|
+      status.temperatures.each_key do |key|
+        if temperatures[key] == nil
+          temperatures[key] = []
+        end
+        temperatures[key] << status.temperatures[key]
+      end
+    end
+
+    temperatures.each_key do |sensor|
+      ts = TempSummary.new
+      ts.sensor = sensor
+      ts.current = current_temperature(sensor)
+      ts.min, ts.max = temperatures[sensor].minmax
+      ts.mean =temperatures[sensor].mean
+      readings << ts
+    end
+    readings
   end
 
   def update_temp(name, temp)
@@ -43,20 +84,7 @@ class ThermState
   end
 
   def current_temperature(sensor)
-    @temp_data[sensor][@list_index]
-  end
-
-  def summary()
-    readings = []
-    @temp_data.each_key do |sensor|
-      ts = TempSummary.new
-      ts.sensor = sensor
-      ts.current = current_temperature(sensor)
-      ts.min, ts.max = @temp_data[sensor].minmax
-      ts.mean = @temp_data[sensor].mean
-      readings << ts
-    end
-    readings
+    @status_list[@list_index].temperatures[sensor]
   end
 
   def save(filename)

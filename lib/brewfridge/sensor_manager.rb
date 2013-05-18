@@ -7,6 +7,15 @@ class SensorManager
     @max_loops = max_loops
   end
 
+  def read_temperatures
+    temperatures = {}
+    list_sensor_names.each do |sensor|
+      temp = read_temp sensor
+      temperatures[sensor] = temp
+    end
+    temperatures
+  end
+
   def list_sensor_names
     Dir.entries(@sensors_dir).select { |d| d.start_with?("28") }
   end

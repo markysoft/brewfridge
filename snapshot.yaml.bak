@@ -1,9 +1,12 @@
 --- !ruby/object:ThermState
 looped: false
 list_index: 0
-temp_data:
-  28-00000400941f:
-  - 21.0
-  28-000004955c1e:
-  - 21.0
+status_list:
+- !ruby/object:FridgeStatus
+  time: 2013-05-18 11:37:28.843529000 +01:00
+  heating: true
+  temperatures:
+    28-00000400941f: 21.0
+    28-000004955c1e: 11.564
 list_max: 2880
+heating: true
