@@ -10,6 +10,7 @@ sudo install git
 git clone https://github.com/markysoft/brewfridge.git
 cd to brewfridge
 sudo bundle install
+chmod +x toggle
 
 to run tests:
 rspec -fd
