@@ -3,7 +3,7 @@ looped: false
 list_index: 0
 status_list:
 - !ruby/object:FridgeStatus
-  time: 2013-05-18 16:37:57.863688000 +01:00
+  time: 2013-05-18 16:44:05.900739000 +01:00
   heating: true
   temperatures:
     28-00000400941f: 21.0
