@@ -2,7 +2,7 @@ class FridgeController
 
   TOP_DIR = File.dirname(__FILE__) + '/../..'
 
-  attr_accessor :settings, :state
+  attr_accessor :settings, :state, :sensor_manager
 
   def initialize
     @settings = load_settings()
@@ -15,6 +15,15 @@ class FridgeController
 
   def load_settings
     YAML.load(File.read("#{TOP_DIR}/settings.yaml"))
+  end
+
+  def save_settings (settings)
+    @settings.target_temp = settings["target_temp"].to_f
+    @settings.tolerance = settings["tolerance"].to_f
+    #@settings.sleep_for = settings["sleep_for"].to_i
+    @settings.fridge_sensor = settings["fridge_sensor"]
+    @settings.toggle_command = settings["toggle_command"]
+    @settings.save("#{TOP_DIR}/settings.yaml")
   end
 
   def run

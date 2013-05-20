@@ -1,5 +1,5 @@
 $primary_color: #C5D8D8;
-$tertiary_color:  darken($primary_color, 20%);
+$tertiary_color: darken($primary_color, 20%);
 
 @mixin borders {
   border: 1px solid darken($primary_color, 20%);
@@ -17,75 +17,85 @@ $tertiary_color:  darken($primary_color, 20%);
   border: $width $color solid;
 }
 
-ul {
-  @include rounded_borders($tertiary_color, 0.1em);
-  background: #fff;
-  //font-weight: bold;
+body {
 
-  border: 1px solid $tertiary_color;
-  margin-top: 5px;
-  margin-left: 5px;
-  margin-right: 5px;
-  li {
-    display: inline;
-    line-height: 1.5em;
-    padding: 0 1em;
-  }
-  a {
-    color: #000;
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
+  font: 1em Helvetica, sans-serif;
+
+  ul {
+    @include rounded_borders($tertiary_color, 0.1em);
+    background: #fff;
+    //font-weight: bold;
+
+    border: 1px solid $tertiary_color;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    li {
+      display: inline;
+      line-height: 1.5em;
+      padding: 0 1em;
+    }
+    a {
+      color: #000;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
-}
 
+  h1 {
+    font-size: 2em;
+  }
 
-h1 {
-  font-size: 2em;
-}
+  h2 {
+    font-size: 1.1em;
+    padding: 0.2em;
+  }
 
-h2 {
-  font-size: 1.1em;
-  padding: 0.2em;
-}
+  .container {
+    width: 24em;
+    margin: auto;
 
-.container {
-  width: 24em;
-  margin: auto;
+    //border: 1px solid #C5D8D8;
+  }
 
-  //border: 1px solid #C5D8D8;
-}
+  .heading {
+    float: left;
+    padding: 0.5em;
+    //@include rounded_borders($tertiary_color, 0.1em);
+  }
+  .menu {
+    float: right;
+    clear: right;
+    padding: 0.5em;
+  }
 
-.heading {
-  float: left;
-  padding: 0.5em;
-  //@include rounded_borders($tertiary_color, 0.1em);
-}
-.menu {
-  float: right;
-  clear: right;
-  padding: 0.5em;
-}
+  .content {
+    clear: both;
+    padding: 0.5em;
+  }
 
-.content {
-  clear: both;
-  padding: 0.5em;
-}
+  table {
+    /*border: 1px solid;*/
+  }
 
-table {
-  /*border: 1px solid;*/
-}
+  th {
+    background: $primary_color;
+  }
 
+  tr {
+    @include borders;
+  }
 
-th {
-  background: $primary_color;
-}
+  td {
+    @include borders;
+  }
 
-tr {
-  @include borders;
-}
+  .settings_label {
+    display:block;
+    float: left;
+    width: 12em;
+  }
 
-td {
-  @include borders;
 }

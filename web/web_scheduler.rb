@@ -29,6 +29,15 @@ class WebScheduler < Sinatra::Base
     erb :index
   end
 
+  get '/manage' do
+    erb :manage, :locals => {:sensors => FC.sensor_manager.list_sensor_names}
+  end
+
+  post '/update_settings' do
+    FC.save_settings params[:settings]
+    redirect "/"
+  end
+
   get '/summary' do
     json = "{ "
     FC.state.summary.each do |state|
