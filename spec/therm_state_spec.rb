@@ -25,6 +25,29 @@ describe "Persistence of ThermState" do
     recovered_state.current_temperature(sensor_a).should == 15
     recovered_state.current_temperature(sensor_b).should == 17
   end
+
+  it "should append readings in json to a file" do
+    manager = SensorManager.new("/fakedir")
+    manager.stub(:list_sensor_names).and_return([sensor_a, sensor_b])
+    manager.stub(:read_temp).with(sensor_a).and_return(15,18)
+    manager.stub(:read_temp).with(sensor_b).and_return(17,19)
+    state = ThermState.new(4)
+    state.refresh_fridge_status manager
+    filename = "./readings.json"
+    if File.exists? filename
+      File.delete filename
+    end
+    state.append_readings filename
+    state.heating = true
+    state.refresh_fridge_status manager
+    state.append_readings filename
+
+    dm = DataManager.new
+    recovered_states = dm.load_fridge_statuses_from_file filename
+    recovered_states.length.should == 2
+    recovered_states[0].heating.should == false
+    recovered_states[1].heating.should == true
+  end
 end
 
 describe "Recording heater activity" do

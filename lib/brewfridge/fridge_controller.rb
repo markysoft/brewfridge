@@ -52,6 +52,7 @@ class FridgeController
 
     @console_writer.print_temps @state.summary
     @state.save "snapshot.yaml"
+    @state.append_readings "#{TOP_DIR}/data/fridge_statuses"
   end
 
   def log_exception(exception)

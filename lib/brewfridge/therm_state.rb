@@ -94,7 +94,15 @@ class ThermState
     @status_list[@list_index].temperatures[sensor]
   end
 
+  def append_readings(json_file)
+    if (@list_index >= 0)
+      open(json_file, 'a') do |f|
+        f.puts "#{@status_list[@list_index].to_json}\n"
+      end
+    end
+  end
+
   def save(filename)
-    File.open(filename, 'w') {|f| f.write(YAML.dump(self)) }
+    File.open(filename, 'w') { |f| f.write(YAML.dump(self)) }
   end
 end
