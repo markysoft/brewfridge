@@ -1,0 +1,16 @@
+
+<div id="chart_div" ></div>
+   <script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable(<%=data.to_json %>);
+
+        var options = {
+            title: 'Temperature'
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+</script>

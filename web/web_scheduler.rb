@@ -20,6 +20,7 @@ class WebScheduler < Sinatra::Base
 
   scheduler = Rufus::Scheduler.start_new
   FC = FridgeController.new()
+  DM = DataManager.new()
 
   scheduler.every "#{FC.settings.sleep_for}s" do
     FC.refresh_state
@@ -27,6 +28,11 @@ class WebScheduler < Sinatra::Base
 
   get '/' do
     erb :index
+  end
+
+  get '/chart' do
+    ca = DM.google_chart_array "fridge_statuses"
+    erb :chart, :locals => {:data => ca}
   end
 
   get '/manage' do

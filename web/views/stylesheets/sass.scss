@@ -33,7 +33,7 @@ body {
     li {
       display: inline;
       line-height: 1.5em;
-      padding: 0 1em;
+      padding: 0 0.2em;
     }
     a {
       color: #000;
@@ -74,6 +74,7 @@ body {
   .content {
     clear: both;
     padding: 0.5em;
+    //border: 1px solid;
   }
 
   table {
@@ -98,4 +99,10 @@ body {
     width: 12em;
   }
 
+  #chart_div {
+
+    height: 18em;
+    width: 24em;
+    border: 1px solid;
+  }
 }
