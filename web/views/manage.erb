@@ -1,18 +1,20 @@
-<form method="POST" action="/update_settings" >
-  <label class="settings_label" for="target_temp">Target Temperature:</label>
-  <input name="settings[target_temp]" type="text" value="<%=FC.settings.target_temp%>"/> <br/>
-  <label class="settings_label"  for="tolerance">Tolerance:</label>
-  <input name="settings[tolerance]" type="text" value="<%=FC.settings.tolerance%>"/> <br/>
-  <!--<label class="settings_label"  for="sleep_for">Measure Every (Secs):</label>-->
-  <!--<input name="settings[sleep_for]" type="text" value="<%=FC.settings.sleep_for%>"/> <br/>-->
-  <label class="settings_label"  for="fridge_sensor">Fridge Sensor:</label>
-  <!--<input name="settings[fridge_sensor]" type="text" value="<%=FC.settings.fridge_sensor%>"/> <br/>-->
-  <select name="settings[fridge_sensor]">
-    <% sensors.each do |sensor| %>
-        <option value=<%= sensor %> <%= 'selected="selected"' if sensor == FC.settings.fridge_sensor %>><%= sensor %></option>
-    <% end %>
-  </select>
-  <label class="settings_label"  for="toggle_command">Toggle Command:</label>
-  <input name="settings[toggle_command]" type="text" value="<%=FC.settings.toggle_command%>"> <br/>
-<input type="submit" value="Update" />
-</form>
+<div class='central_small'>
+  <form method="POST" action="/update_settings">
+    <label class="settings_label" for="target_temp">Target Temperature:</label>
+    <input name="settings[target_temp]" type="text" value="<%= FC.settings.target_temp %>"/> <br/>
+    <label class="settings_label" for="tolerance">Tolerance:</label>
+    <input name="settings[tolerance]" type="text" value="<%= FC.settings.tolerance %>"/> <br/>
+    <!--<label class="settings_label"  for="sleep_for">Measure Every (Secs):</label>-->
+    <!--<input name="settings[sleep_for]" type="text" value="<%= FC.settings.sleep_for %>"/> <br/>-->
+    <label class="settings_label" for="fridge_sensor">Fridge Sensor:</label>
+    <!--<input name="settings[fridge_sensor]" type="text" value="<%= FC.settings.fridge_sensor %>"/> <br/>-->
+    <select name="settings[fridge_sensor]">
+      <% sensors.each do |sensor| %>
+          <option value=<%= sensor %> <%= 'selected="selected"' if sensor == FC.settings.fridge_sensor %>><%= sensor %></option>
+      <% end %>
+    </select><br/>
+    <label class="settings_label" for="toggle_command">Toggle Command:</label>
+    <input name="settings[toggle_command]" type="text" value="<%= FC.settings.toggle_command %>"> <br/>
+    <input type="submit" value="Update"/>
+  </form>
+</div>

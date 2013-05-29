@@ -20,7 +20,7 @@ class DataManager
     states = load_fridge_statuses_from_file DATA_DIR + filename
     states.each do |state|
       row = []
-      row << state.time
+      row << Time.parse(state.time).strftime("%H:%M:%S")
       state.temperatures.each_value do |temp|
         row << temp
         results << row
@@ -28,5 +28,9 @@ class DataManager
 
     end
     results
+  end
+
+  def list_files
+    Dir.entries(DATA_DIR).select { |d| d.start_with?("20") }
   end
 end

@@ -30,9 +30,13 @@ class WebScheduler < Sinatra::Base
     erb :index
   end
 
-  get '/chart' do
-    ca = DM.google_chart_array "fridge_statuses"
-    erb :chart, :locals => {:data => ca}
+  get '/charts' do
+    erb :charts, :locals => {:data_files => DM.list_files}
+  end
+
+  get '/charts/:name' do
+    ca = DM.google_chart_array params[:name]
+    erb :chart, :locals => {:date => params[:name], :data => ca}
   end
 
   get '/manage' do

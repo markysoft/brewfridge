@@ -54,6 +54,12 @@ body {
   }
 
   .container {
+    width: 48em;
+    margin: auto;
+
+    //border: 1px solid #C5D8D8;
+  }
+  .central_small {
     width: 24em;
     margin: auto;
 
@@ -101,8 +107,8 @@ body {
 
   #chart_div {
 
-    height: 18em;
-    width: 24em;
+    height: 36em;
+    width: 48em;
     border: 1px solid;
   }
 }
