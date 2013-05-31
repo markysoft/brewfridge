@@ -51,7 +51,8 @@ class FridgeController
     @state.heating = @heat_controller.update(fridge_temperature)
 
     @console_writer.print_temps @state.summary
-    @state.save "snapshot.yaml"
+    #runs out of memory... we save individual rows now anyway
+    #@state.save "snapshot.yaml"
     date_file = Time.now.strftime("%Y%m%d")
     @state.append_readings "#{TOP_DIR}/data/#{date_file}"
   end
