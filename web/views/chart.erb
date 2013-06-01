@@ -1,17 +1,9 @@
 <h2>Chart for <%=date%></h2>
-<div id="chart_div" ></div>
-   <script type="text/javascript">
-    google.load("visualization", "1", {packages:["corechart"]});
-    google.setOnLoadCallback(drawChart);
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable(<%=data.to_json %>);
 
-        var options = {
-            title: 'Temperature',
-            hAxis: {slantedTextAngle: 90}
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-    }
+<div id="chart_div"></div>
+<script type="text/javascript">
+    g3 = new Dygraph(
+            document.getElementById("chart_div"),
+            "/charts/csv/<%=date%>"
+    );
 </script>

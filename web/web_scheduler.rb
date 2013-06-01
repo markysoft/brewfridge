@@ -38,6 +38,10 @@ class WebScheduler < Sinatra::Base
     ca = DM.google_chart_array params[:name]
     erb :chart, :locals => {:date => params[:name], :data => ca}
   end
+  get '/charts/csv/:name' do
+    ca = DM.dygraphs_csv params[:name]
+    ca.join("\n")
+  end
 
   get '/manage' do
     erb :manage, :locals => {:sensors => FC.sensor_manager.list_sensor_names}
