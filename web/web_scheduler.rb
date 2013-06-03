@@ -39,7 +39,7 @@ class WebScheduler < Sinatra::Base
     erb :chart, :locals => {:date => params[:name], :data => ca}
   end
   get '/charts/csv/:name' do
-    ca = DM.dygraphs_csv params[:name]
+    ca = DM.temps_csv params[:name]
     ca.join("\n")
   end
 

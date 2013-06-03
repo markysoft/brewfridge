@@ -34,23 +34,34 @@ class DataManager
     results
   end
 
-  def dygraphs_csv filename
+  def temps_csv filename
     results = []
-    results << "time,t1,t2"
-
     states = load_fridge_statuses_from_file @data_dir + filename
+    if states.length > 0
+      results <<  write_header(states[0].temperatures.length)
+    end
+
     states.each do |state|
       row = Time.parse(state.time).strftime("%Y/%m/%d %H:%M:%S")
       state.temperatures.each_value do |temp|
         row += ",#{temp}"
       end
       results << row
-
     end
+
     results
   end
 
-  def list_files
-    Dir.entries(@data_dir).select { |d| d.start_with?("20") }
+  def write_header(sensors)
+    header = 'time'
+    (1..sensors).each do |index|
+      header += ",t#{index}"
+    end
+    header
   end
+
+  def list_files
+    Dir.entries(@data_dir).select { |d| d.start_with?("20") }.sort
+  end
+
 end
