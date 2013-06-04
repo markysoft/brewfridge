@@ -1,9 +1,16 @@
-<h2>Chart for <%=date%></h2>
+<h2>Charts for <%=date%></h2>
 
-<div id="chart_div"></div>
+<h3>Temperatures</h3>
+<div id="temp_chart" class='charts'></div>
+<h3>Heater Activity</h3>
+<div id="heating_chart" class='charts'></div>
 <script type="text/javascript">
-    g3 = new Dygraph(
-            document.getElementById("chart_div"),
-            "/charts/csv/<%=date%>"
+    g1 = new Dygraph(
+            document.getElementById("temp_chart"),
+            "/charts/csv/temp/<%=date%>"
+    );
+    g2 = new Dygraph(
+            document.getElementById("heating_chart"),
+            "/charts/csv/heater/<%=date%>"
     );
 </script>

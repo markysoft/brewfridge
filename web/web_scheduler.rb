@@ -35,12 +35,17 @@ class WebScheduler < Sinatra::Base
   end
 
   get '/charts/:name' do
-    ca = DM.google_chart_array params[:name]
-    erb :chart, :locals => {:date => params[:name], :data => ca}
+    erb :chart, :locals => {:date => params[:name]}
   end
-  get '/charts/csv/:name' do
-    ca = DM.temps_csv params[:name]
-    ca.join("\n")
+
+  get '/charts/csv/temp/:name' do
+    temps = DM.temps_csv params[:name]
+    temps.join("\n")
+  end
+
+  get '/charts/csv/heater/:name' do
+    heatings = DM.heating_csv params[:name]
+    heatings.join("\n")
   end
 
   get '/manage' do

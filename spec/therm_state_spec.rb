@@ -119,4 +119,17 @@ describe "Recording temperature" do
     summary[1].max.should == 21
   end
 
+  it "should return heater_utilisation" do
+    manager = SensorManager.new("/fakedir")
+    manager.stub(:list_sensor_names).and_return([sensor_a])
+    manager.stub(:read_temp).with(sensor_a).and_return(21)
+    state = ThermState.new(4)
+    state.heating = true
+    state.refresh_fridge_status manager
+    state.refresh_fridge_status manager
+    state.heating = false
+    2.times { state.refresh_fridge_status manager }
+    state.heater_utilisation.should == 25
+  end
+
 end

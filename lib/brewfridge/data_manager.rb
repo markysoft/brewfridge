@@ -17,21 +17,27 @@ class DataManager
     recovered_states
   end
 
-  def google_chart_array filename
+  def heating_csv filename
     results = []
-    results << ['time', 't1', 't2']
-
     states = load_fridge_statuses_from_file @data_dir + filename
-    states.each do |state|
-      row = []
-      row << Time.parse(state.time).strftime("%H:%M:%S")
-      state.temperatures.each_value do |temp|
-        row << temp
-      end
-      results << row
+    results <<  "time,heating"
 
+    last_heating = nil
+    states.each do |state|
+      state_time = Time.parse(state.time).strftime("%Y/%m/%d %H:%M:%S")
+      if heater_switched(last_heating, state.heating)
+        #ensures we get a vertical line in chart
+        results << "#{state_time},#{last_heating ? 1 : 0}"
+      end
+      results << "#{state_time},#{state.heating ? 1 : 0}"
+      last_heating = state.heating
     end
+
     results
+  end
+
+  def heater_switched(last_heating, current_heating)
+    last_heating != nil && last_heating != current_heating
   end
 
   def temps_csv filename

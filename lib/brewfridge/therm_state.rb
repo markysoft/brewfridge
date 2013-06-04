@@ -58,6 +58,15 @@ class ThermState
     @list_index = next_index
   end
 
+  def heater_utilisation
+    if (@status_list.length > 0)
+      100 * @status_list.select { |value| value.heating }.length / @status_list.length
+    else
+      0
+    end
+
+  end
+
   def summary()
     readings = []
     temperatures = {}
