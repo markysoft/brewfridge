@@ -38,9 +38,21 @@ class WebScheduler < Sinatra::Base
     erb :chart, :locals => {:date => params[:name]}
   end
 
+  get '/hcharts/:name' do
+    erb :hchart, :locals => {:date => params[:name]}
+  end
+
   get '/charts/csv/temp/:name' do
     temps = DM.temps_csv params[:name]
     temps.join("\n")
+  end
+
+  get '/hello' do
+    'hello'
+  end
+  get '/charts/json/:name' do
+    content_type :json
+    DM.chart_json params[:name]
   end
 
   get '/charts/csv/heater/:name' do

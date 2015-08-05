@@ -10,6 +10,11 @@ describe 'data file manager' do
     dm.list_files.length.should > 0
   end
 
+  it 'should create json text' do
+    dy = dm.chart_json "20130520"
+    dy.length.should > 0
+  end
+
   it 'should create dygraphs temps csv' do
     dy = dm.temps_csv "20130520"
     dy.length.should eq 8

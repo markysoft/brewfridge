@@ -36,6 +36,22 @@ class DataManager
     results
   end
 
+  def chart_json filename
+    recovered_states = []
+    File.open(@data_dir + filename, "r").each_line do |line|
+      recovered_states << line
+    end
+    return '[' + recovered_states.join(',') + ']'
+
+    json = "[ "
+    File.open(@data_dir + filename, "r").each_line do |line|
+      j = FridgeStatus.new
+      j.from_json! line
+      json += j.to_json + ","
+    end
+    json.chomp(",") + " ]"
+  end
+
   def heater_switched(last_heating, current_heating)
     last_heating != nil && last_heating != current_heating
   end
