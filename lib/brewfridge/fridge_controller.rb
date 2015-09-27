@@ -24,6 +24,8 @@ class FridgeController
     @settings.fridge_sensor = settings["fridge_sensor"]
     @settings.toggle_command = settings["toggle_command"]
     @settings.save("#{TOP_DIR}/settings.yaml")
+    @heat_controller.target_temp = @settings.target_temp
+
   end
 
   def run
@@ -50,7 +52,8 @@ class FridgeController
     fridge_temperature = @state.current_temperature(@settings.fridge_sensor)
     @state.heating = @heat_controller.update(fridge_temperature)
 
-    @console_writer.print_temps @state.summary
+    #@console_writer.print_temps @state.summary
+    @console_writer.print_temps @state
     #runs out of memory... we save individual rows now anyway
     #@state.save "snapshot.yaml"
     date_file = Time.now.strftime("%Y%m%d")

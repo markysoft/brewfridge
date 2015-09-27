@@ -1,5 +1,5 @@
 class HeatController
-
+  attr_accessor  :target_temp
   TOP_DIR = File.dirname(__FILE__) + '/../..'
 
   def initialize(settings, heating)
